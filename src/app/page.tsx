@@ -1,20 +1,16 @@
-import FilterOptions from "./components/FilterOptions";
-import CourseCard from "./components/CourseCard";
-import { prisma } from "@/lib/prisma";
-import { Course } from "@prisma/client";
+import FilterOptions from "@/app/components/FilterOptions";
+import CourseCard from "@/app/components/CourseCard";
+import { getCourses } from "@/services/courses";
 
 export default async function Courses({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
   const { category, difficulty } = await searchParams;
 
-  const filters: { category?: string; difficulty?: string } = {};
+  const filters = {
+    category: category || undefined,
+    difficulty: difficulty || undefined,
+  };
 
-  if (category) filters.category = category;
-  if (difficulty) filters.difficulty = difficulty;
-
-  const courses: Course[] = await prisma.course.findMany({
-    where: filters,
-    orderBy: { title: "asc" },
-  });
+  const courses = await getCourses(filters);
 
   return (
     <div className="min-h-screen bg-primary p-6">
