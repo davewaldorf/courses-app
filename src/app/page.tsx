@@ -4,9 +4,10 @@ import { prisma } from "@/lib/prisma";
 import { Course } from "@prisma/client";
 
 export default async function Courses({searchParams}: {searchParams: { [key: string]: string }}) {
-  const { category, difficulty } = searchParams;
+  const { category, difficulty } = await searchParams;
 
   const filters: { category?: string; difficulty?: string } = {};
+
   if (category) filters.category = category;
   if (difficulty) filters.difficulty = difficulty;
 
