@@ -3,7 +3,7 @@ import CourseCard from "./components/CourseCard";
 import { prisma } from "@/lib/prisma";
 import { Course } from "@prisma/client";
 
-export default async function Courses({searchParams}: {searchParams: { [key: string]: string }}) {
+export default async function Courses({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
   const { category, difficulty } = await searchParams;
 
   const filters: { category?: string; difficulty?: string } = {};
