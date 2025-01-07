@@ -5,21 +5,20 @@ type CourseCardProps = {
   course: Course;
 };
 
+const getBadgeColor = (type: Course["difficulty"]) => {
+  switch (type) {
+    case "beginner":
+      return "badge-primary";
+    case "intermediate":
+      return "badge-secondary";
+    case "advanced":
+      return "badge-accent";
+    default:
+      return "badge-primary";
+  }
+};
+
 const CourseCard = ({course}: CourseCardProps) => {
-
-  const getBadgeColor = (type: Course["difficulty"]) => {
-    switch (type) {
-      case "beginner":
-        return "badge-primary";
-      case "intermediate":
-        return "badge-secondary";
-      case "advanced":
-        return "badge-accent";
-      default:
-        return "badge-primary";
-    }
-  };
-
   return (
     <div className="card w-full glass shadow-lg">
       <div className="card-body">
